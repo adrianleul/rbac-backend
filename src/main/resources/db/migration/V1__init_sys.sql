@@ -155,8 +155,8 @@ CREATE TABLE sys_menu (
 
 INSERT INTO sys_menu (menu_name,parent_id,order_num,"path",component,query,route_name,is_frame,is_cache,menu_type,visible,status,perms,icon,create_by,create_time,update_by,update_time,remark) VALUES
 	 ('Dashboard',0,1,'/admin',NULL,NULL,'','1','0','C','0','0','admin:dashboard:list','Gauge','admin','2025-07-14 16:48:34.509985','admin','2025-07-14 16:53:37.272895',''),
-     ('System Management',0,2,'/admin/system/user',NULL,NULL,'','1','0','M','0','0','system:user:list','Settings','admin','2025-07-14 16:50:21.274859','',NULL,''),
-     ('System Monitoring',0,3,'',NULL,NULL,'','1','0','M','0','0','system:monitoring:list','Monitor','admin','2025-07-14 16:51:19.500095','',NULL,''),
+     ('System Management',0,2,'/admin/system/user',NULL,NULL,'','1','0','M','0','0','system:management:list','Settings','admin','2025-07-14 16:50:21.274859','',NULL,''),
+	 ('System Monitoring',0,3,'',NULL,NULL,'','1','0','M','0','0','system:monitoring:list','Monitor','admin','2025-07-14 16:51:19.500095','',NULL,''),
      ('Users',2,1,'/admin/system/user','layout/admin/system/user',NULL,'','1','1','C','0','0','system:user:list','User','admin','2025-07-14 17:00:18.436984','',NULL,''),
 	 ('Roles',2,2,'',NULL,NULL,'','1','1','C','0','0','system:role:list','ShieldCheck','admin','2025-07-14 17:02:31.732709','',NULL,''),
 	 ('Menus',2,3,'',NULL,NULL,'','1','1','C','0','0','system:menu:list','List','admin','2025-07-14 17:05:15.344897','',NULL,''),
@@ -172,60 +172,60 @@ INSERT INTO sys_menu (menu_name,parent_id,order_num,"path",component,query,route
 	 ('Login Log',3,5,'',NULL,NULL,'','1','1','C','0','0','monitor:logininfor:list','Key','admin','2025-07-14 17:24:43.555407','',NULL,''),
 	 ('Cache',3,6,'',NULL,NULL,'','1','1','C','0','0','monitor:cache:list','HardDrive','admin','2025-07-14 17:25:33.59434','',NULL,''),
 	 ('Cache List',3,7,'',NULL,NULL,'','1','1','C','0','0','monitor:cache:list','Database','admin','2025-07-14 17:27:31.549262','',NULL,''),
-	 ('User Query',5,1,'',NULL,NULL,'','1','0','F','0','0','system:user:query','#','admin','2025-07-14 17:31:45.317934','',NULL,''),
-	 ('Add User',5,2,'',NULL,NULL,'','1','0','F','0','0','system:user:add','#','admin','2025-07-14 17:32:13.374191','',NULL,'');
+     ('User Query',4,1,'',NULL,NULL,'','1','0','F','0','0','system:user:query','#','admin','2025-07-14 17:31:45.317934','',NULL,''),
+     ('Add User',4,2,'',NULL,NULL,'','1','0','F','0','0','system:user:add','#','admin','2025-07-14 17:32:13.374191','',NULL,'');
 INSERT INTO sys_menu (menu_name,parent_id,order_num,"path",component,query,route_name,is_frame,is_cache,menu_type,visible,status,perms,icon,create_by,create_time,update_by,update_time,remark) VALUES
-	 ('Edit User',5,3,'',NULL,NULL,'','1','0','F','0','0','system:user:edit','#','admin','2025-07-14 18:03:41.834948','',NULL,''),
-	 ('Delete User',5,4,'',NULL,NULL,'','1','0','F','0','0','system:user:remove','#','admin','2025-07-14 18:04:20.418486','',NULL,''),
-	 ('Export User',5,5,'',NULL,NULL,'','1','0','F','0','0','system:user:export','#','admin','2025-07-14 18:05:01.810625','',NULL,''),
-	 ('Import User',5,6,'',NULL,NULL,'','1','0','F','0','0','system:user:import','#','admin','2025-07-14 18:05:25.18649','',NULL,''),
-	 ('Reset Password',5,7,'',NULL,NULL,'','1','0','F','0','0','system:user:resetPwd','#','admin','2025-07-14 18:05:58.020742','',NULL,''),
-	 ('Role Query',6,1,'',NULL,NULL,'','1','0','F','0','0','system:role:query','#','admin','2025-07-14 18:06:18.84077','',NULL,''),
-	 ('Add Role',6,2,'',NULL,NULL,'','1','0','F','0','0','system:role:add','#','admin','2025-07-14 18:06:49.059022','',NULL,''),
-	 ('Edit Role',6,3,'',NULL,NULL,'','1','0','F','0','0','system:role:edit','#','admin','2025-07-14 18:07:29.118628','',NULL,''),
-	 ('Delete Role',6,4,'',NULL,NULL,'','1','0','F','0','0','system:role:remove','#','admin','2025-07-14 18:08:11.582679','',NULL,''),
-	 ('Export Role',6,5,'',NULL,NULL,'','1','0','F','0','0','system:role:export','#','admin','2025-07-14 18:08:39.385475','',NULL,'');
+     ('Edit User',4,3,'',NULL,NULL,'','1','0','F','0','0','system:user:edit','#','admin','2025-07-14 18:03:41.834948','',NULL,''),
+     ('Delete User',4,4,'',NULL,NULL,'','1','0','F','0','0','system:user:remove','#','admin','2025-07-14 18:04:20.418486','',NULL,''),
+     ('Export User',4,5,'',NULL,NULL,'','1','0','F','0','0','system:user:export','#','admin','2025-07-14 18:05:01.810625','',NULL,''),
+     ('Import User',4,6,'',NULL,NULL,'','1','0','F','0','0','system:user:import','#','admin','2025-07-14 18:05:25.18649','',NULL,''),
+     ('Reset Password',4,7,'',NULL,NULL,'','1','0','F','0','0','system:user:resetPwd','#','admin','2025-07-14 18:05:58.020742','',NULL,''),
+     ('Role Query',5,1,'',NULL,NULL,'','1','0','F','0','0','system:role:query','#','admin','2025-07-14 18:06:18.84077','',NULL,''),
+     ('Add Role',5,2,'',NULL,NULL,'','1','0','F','0','0','system:role:add','#','admin','2025-07-14 18:06:49.059022','',NULL,''),
+     ('Edit Role',5,3,'',NULL,NULL,'','1','0','F','0','0','system:role:edit','#','admin','2025-07-14 18:07:29.118628','',NULL,''),
+     ('Delete Role',5,4,'',NULL,NULL,'','1','0','F','0','0','system:role:remove','#','admin','2025-07-14 18:08:11.582679','',NULL,''),
+     ('Export Role',5,5,'',NULL,NULL,'','1','0','F','0','0','system:role:export','#','admin','2025-07-14 18:08:39.385475','',NULL,'');
 INSERT INTO sys_menu (menu_name,parent_id,order_num,"path",component,query,route_name,is_frame,is_cache,menu_type,visible,status,perms,icon,create_by,create_time,update_by,update_time,remark) VALUES
-	 ('Menu Query',7,1,'',NULL,NULL,'','1','0','F','0','0','system:menu:query','#','admin','2025-07-14 18:09:20.145307','',NULL,''),
-	 ('Add Menu',7,2,'',NULL,NULL,'','1','0','F','0','0','system:menu:add','#','admin','2025-07-14 18:09:46.788333','',NULL,''),
-	 ('Edit Menu',7,3,'',NULL,NULL,'','1','0','F','0','0','system:menu:edit','#','admin','2025-07-14 18:10:11.140718','',NULL,''),
-	 ('Delete Menu',7,4,'',NULL,NULL,'','1','0','F','0','0','system:menu:remove','#','admin','2025-07-14 18:10:38.641664','',NULL,''),
-	 ('Department Query',12,1,'',NULL,NULL,'','1','0','F','0','0','system:dept:query','#','admin','2025-07-14 18:11:16.062147','',NULL,''),
-	 ('Add Department',12,2,'',NULL,NULL,'','1','0','F','0','0','system:dept:add','#','admin','2025-07-14 18:11:38.055115','',NULL,''),
-	 ('Edit Department',12,3,'',NULL,NULL,'','1','0','F','0','0','system:dept:edit','#','admin','2025-07-14 18:12:07.314512','',NULL,''),
-	 ('Delete Department',12,4,'',NULL,NULL,'','1','0','F','0','0','system:dept:remove','#','admin','2025-07-14 18:12:36.536344','admin','2025-07-14 18:12:47.940895',''),
-	 ('Post Query',11,1,'',NULL,NULL,'','1','0','F','0','0','system:post:query','#','admin','2025-07-14 18:20:14.717474','',NULL,''),
-	 ('Add Post',11,2,'',NULL,NULL,'','1','0','F','0','0','system:post:add','#','admin','2025-07-14 18:21:01.186881','',NULL,'');
+     ('Menu Query',6,1,'',NULL,NULL,'','1','0','F','0','0','system:menu:query','#','admin','2025-07-14 18:09:20.145307','',NULL,''),
+     ('Add Menu',6,2,'',NULL,NULL,'','1','0','F','0','0','system:menu:add','#','admin','2025-07-14 18:09:46.788333','',NULL,''),
+     ('Edit Menu',6,3,'',NULL,NULL,'','1','0','F','0','0','system:menu:edit','#','admin','2025-07-14 18:10:11.140718','',NULL,''),
+     ('Delete Menu',6,4,'',NULL,NULL,'','1','0','F','0','0','system:menu:remove','#','admin','2025-07-14 18:10:38.641664','',NULL,''),
+     ('Department Query',11,1,'',NULL,NULL,'','1','0','F','0','0','system:dept:query','#','admin','2025-07-14 18:11:16.062147','',NULL,''),
+     ('Add Department',11,2,'',NULL,NULL,'','1','0','F','0','0','system:dept:add','#','admin','2025-07-14 18:11:38.055115','',NULL,''),
+     ('Edit Department',11,3,'',NULL,NULL,'','1','0','F','0','0','system:dept:edit','#','admin','2025-07-14 18:12:07.314512','',NULL,''),
+     ('Delete Department',11,4,'',NULL,NULL,'','1','0','F','0','0','system:dept:remove','#','admin','2025-07-14 18:12:36.536344','admin','2025-07-14 18:12:47.940895',''),
+     ('Post Query',10,1,'',NULL,NULL,'','1','0','F','0','0','system:post:query','#','admin','2025-07-14 18:20:14.717474','',NULL,''),
+     ('Add Post',10,2,'',NULL,NULL,'','1','0','F','0','0','system:post:add','#','admin','2025-07-14 18:21:01.186881','',NULL,'');
 INSERT INTO sys_menu (menu_name,parent_id,order_num,"path",component,query,route_name,is_frame,is_cache,menu_type,visible,status,perms,icon,create_by,create_time,update_by,update_time,remark) VALUES
-	 ('Edit Post',11,3,'',NULL,NULL,'','1','0','F','0','0','system:post:edit','#','admin','2025-07-14 18:21:33.518474','',NULL,''),
-	 ('Delete Post',11,4,'',NULL,NULL,'','1','0','F','0','0','system:post:remove','#','admin','2025-07-14 18:21:58.669386','',NULL,''),
-	 ('Export Post',11,5,'',NULL,NULL,'','1','0','F','0','0','system:post:export','#','admin','2025-07-14 18:22:33.249881','',NULL,''),
-	 ('Dictionary Query',8,1,'',NULL,NULL,'','1','0','F','0','0','system:dict:query','#','admin','2025-07-14 18:23:20.124619','',NULL,''),
-	 ('Add Dictionary',8,2,'',NULL,NULL,'','1','0','F','0','0','system:dict:add','#','admin','2025-07-14 18:23:46.619984','',NULL,''),
-	 ('Edit Dictionary',8,3,'',NULL,NULL,'','1','0','F','0','0','system:dict:edit','#','admin','2025-07-14 18:24:14.109289','',NULL,''),
-	 ('Delete Dictionary',8,4,'',NULL,NULL,'','1','0','F','0','0','system:dict:remove','#','admin','2025-07-14 18:24:57.807078','',NULL,''),
-	 ('Export Dictionary',8,5,'',NULL,NULL,'','1','0','F','0','0','system:dict:export','#','admin','2025-07-14 18:25:27.08423','',NULL,''),
-	 ('Configuration Query',9,1,'',NULL,NULL,'','1','0','F','0','0','system:config:query','#','admin','2025-07-14 18:26:14.836302','',NULL,''),
-	 ('Add Configuration',9,2,'',NULL,NULL,'','1','0','F','0','0','system:config:add','#','admin','2025-07-14 18:26:57.720209','',NULL,'');
+     ('Edit Post',10,3,'',NULL,NULL,'','1','0','F','0','0','system:post:edit','#','admin','2025-07-14 18:21:33.518474','',NULL,''),
+     ('Delete Post',10,4,'',NULL,NULL,'','1','0','F','0','0','system:post:remove','#','admin','2025-07-14 18:21:58.669386','',NULL,''),
+     ('Export Post',10,5,'',NULL,NULL,'','1','0','F','0','0','system:post:export','#','admin','2025-07-14 18:22:33.249881','',NULL,''),
+     ('Dictionary Query',7,1,'',NULL,NULL,'','1','0','F','0','0','system:dict:query','#','admin','2025-07-14 18:23:20.124619','',NULL,''),
+     ('Add Dictionary',7,2,'',NULL,NULL,'','1','0','F','0','0','system:dict:add','#','admin','2025-07-14 18:23:46.619984','',NULL,''),
+     ('Edit Dictionary',7,3,'',NULL,NULL,'','1','0','F','0','0','system:dict:edit','#','admin','2025-07-14 18:24:14.109289','',NULL,''),
+     ('Delete Dictionary',7,4,'',NULL,NULL,'','1','0','F','0','0','system:dict:remove','#','admin','2025-07-14 18:24:57.807078','',NULL,''),
+     ('Export Dictionary',7,5,'',NULL,NULL,'','1','0','F','0','0','system:dict:export','#','admin','2025-07-14 18:25:27.08423','',NULL,''),
+     ('Configuration Query',8,1,'',NULL,NULL,'','1','0','F','0','0','system:config:query','#','admin','2025-07-14 18:26:14.836302','',NULL,''),
+     ('Add Configuration',8,2,'',NULL,NULL,'','1','0','F','0','0','system:config:add','#','admin','2025-07-14 18:26:57.720209','',NULL,'');
 INSERT INTO sys_menu (menu_name,parent_id,order_num,"path",component,query,route_name,is_frame,is_cache,menu_type,visible,status,perms,icon,create_by,create_time,update_by,update_time,remark) VALUES
-	 ('Edit Configuration',9,3,'',NULL,NULL,'','1','0','F','0','0','system:config:edit','#','admin','2025-07-14 18:27:31.892471','',NULL,''),
-	 ('Delete Configuration',9,4,'',NULL,NULL,'','1','0','F','0','0','system:config:remove','#','admin','2025-07-14 18:28:11.710236','',NULL,''),
-	 ('Export Configuration',9,5,'',NULL,NULL,'','1','0','F','0','0','system:config:export','#','admin','2025-07-14 18:28:41.645554','',NULL,''),
-	 ('Notice Query',10,1,'',NULL,NULL,'','1','0','F','0','0','system:notice:query','#','admin','2025-07-14 18:29:25.165537','',NULL,''),
-	 ('Add Notice',10,2,'',NULL,NULL,'','1','0','F','0','0','system:notice:add','#','admin','2025-07-14 18:29:50.09361','',NULL,''),
-	 ('Edit Notice',10,3,'',NULL,NULL,'','1','0','F','0','0','system:notice:edit','#','admin','2025-07-14 18:30:14.905687','',NULL,''),
-	 ('Delete Notice',10,4,'',NULL,NULL,'','1','0','F','0','0','system:notice:remove','#','admin','2025-07-14 18:30:47.561858','',NULL,''),
-	 ('Operation Query',15,1,'',NULL,NULL,'','1','0','F','0','0','monitor:operlog:query','#','admin','2025-07-14 18:32:06.89538','',NULL,''),
-	 ('Delete Operation',15,2,'',NULL,NULL,'','1','0','F','0','0','monitor:operlog:remove','#','admin','2025-07-14 18:32:33.176259','',NULL,''),
-	 ('Export Log',15,3,'',NULL,NULL,'','1','0','F','0','0','monitor:operlog:export','#','admin','2025-07-14 18:33:00.234482','',NULL,'');
+     ('Edit Configuration',8,3,'',NULL,NULL,'','1','0','F','0','0','system:config:edit','#','admin','2025-07-14 18:27:31.892471','',NULL,''),
+     ('Delete Configuration',8,4,'',NULL,NULL,'','1','0','F','0','0','system:config:remove','#','admin','2025-07-14 18:28:11.710236','',NULL,''),
+     ('Export Configuration',8,5,'',NULL,NULL,'','1','0','F','0','0','system:config:export','#','admin','2025-07-14 18:28:41.645554','',NULL,''),
+     ('Notice Query',9,1,'',NULL,NULL,'','1','0','F','0','0','system:notice:query','#','admin','2025-07-14 18:29:25.165537','',NULL,''),
+     ('Add Notice',9,2,'',NULL,NULL,'','1','0','F','0','0','system:notice:add','#','admin','2025-07-14 18:29:50.09361','',NULL,''),
+     ('Edit Notice',9,3,'',NULL,NULL,'','1','0','F','0','0','system:notice:edit','#','admin','2025-07-14 18:30:14.905687','',NULL,''),
+     ('Delete Notice',9,4,'',NULL,NULL,'','1','0','F','0','0','system:notice:remove','#','admin','2025-07-14 18:30:47.561858','',NULL,''),
+     ('Operation Query',14,1,'',NULL,NULL,'','1','0','F','0','0','monitor:operlog:query','#','admin','2025-07-14 18:32:06.89538','',NULL,''),
+     ('Delete Operation',14,2,'',NULL,NULL,'','1','0','F','0','0','monitor:operlog:remove','#','admin','2025-07-14 18:32:33.176259','',NULL,''),
+     ('Export Log',14,3,'',NULL,NULL,'','1','0','F','0','0','monitor:operlog:export','#','admin','2025-07-14 18:33:00.234482','',NULL,'');
 INSERT INTO sys_menu (menu_name,parent_id,order_num,"path",component,query,route_name,is_frame,is_cache,menu_type,visible,status,perms,icon,create_by,create_time,update_by,update_time,remark) VALUES
-	 ('Login Query',16,1,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:query','#','admin','2025-07-14 18:34:01.539229','',NULL,''),
-	 ('Delete Login',16,2,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:remove','#','admin','2025-07-14 18:35:08.102336','',NULL,''),
-	 ('Export Login',16,3,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:export','#','admin','2025-07-14 18:35:44.50973','',NULL,''),
-	 ('Account Unlock',16,4,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:unlock','#','admin','2025-07-14 18:36:50.758545','',NULL,''),
-	 ('Online Query',13,1,'',NULL,NULL,'','1','0','F','0','0','monitor:online:query','#','admin','2025-07-14 18:44:37.475271','',NULL,''),
-	 ('Batch Force Logout',13,2,'',NULL,NULL,'','1','0','F','0','0','monitor:online:batchLogout','#','admin','2025-07-14 18:44:55.52098','',NULL,''),
-	 ('Single Force Logout',13,3,'',NULL,NULL,'','1','0','F','0','0','monitor:online:forceLogout','#','admin','2025-07-14 18:45:24.995199','',NULL,'');
+     ('Login Query',15,1,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:query','#','admin','2025-07-14 18:34:01.539229','',NULL,''),
+     ('Delete Login',15,2,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:remove','#','admin','2025-07-14 18:35:08.102336','',NULL,''),
+     ('Export Login',15,3,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:export','#','admin','2025-07-14 18:35:44.50973','',NULL,''),
+     ('Account Unlock',15,4,'',NULL,NULL,'','1','0','F','0','0','monitor:logininfor:unlock','#','admin','2025-07-14 18:36:50.758545','',NULL,''),
+     ('Online Query',12,1,'',NULL,NULL,'','1','0','F','0','0','monitor:online:query','#','admin','2025-07-14 18:44:37.475271','',NULL,''),
+     ('Batch Force Logout',12,2,'',NULL,NULL,'','1','0','F','0','0','monitor:online:batchLogout','#','admin','2025-07-14 18:44:55.52098','',NULL,''),
+     ('Single Force Logout',12,3,'',NULL,NULL,'','1','0','F','0','0','monitor:online:forceLogout','#','admin','2025-07-14 18:45:24.995199','',NULL,'');
 
 
 SELECT setval(pg_get_serial_sequence('sys_menu', 'menu_id'), (SELECT MAX(menu_id) FROM sys_menu));

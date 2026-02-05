@@ -15,6 +15,7 @@ import com.rbac.framework.web.service.SysLoginService;
 import com.rbac.framework.web.service.SysPermissionService;
 import com.rbac.framework.web.service.TokenService;
 import com.rbac.system.service.ISysMenuService;
+import com.rbac.system.service.ISysUserService;
 
 @RestController
 @RequestMapping("/auth")
@@ -32,6 +33,9 @@ public class SysLoginController
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private ISysUserService userService;
+
     @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginDto loginDto)
     {
@@ -46,16 +50,21 @@ public class SysLoginController
     public AjaxResult getInfo()
     {
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        SysUser user = loginUser.getUser();
-        Set<String> roles = permissionService.getRolePermission(user);
-        Set<String> permissions = permissionService.getMenuPermission(user);
-        if (!loginUser.getPermissions().equals(permissions))
-        {
+
+        // Always refresh the user entity to ensure latest roles/permissions
+        SysUser refreshedUser = userService.selectUserByUserName(loginUser.getUser().getUserName());
+        loginUser.setUser(refreshedUser);
+
+        Set<String> roles = permissionService.getRolePermission(refreshedUser);
+        Set<String> permissions = permissionService.getMenuPermission(refreshedUser);
+
+        // Update cached permissions if changed
+        if (loginUser.getPermissions() == null || !loginUser.getPermissions().equals(permissions)) {
             loginUser.setPermissions(permissions);
             tokenService.refreshToken(loginUser);
         }
         AjaxResult ajax = AjaxResult.success();
-        ajax.put("user", user);
+        ajax.put("user", refreshedUser);
         ajax.put("roles", roles);
         ajax.put("permissions", permissions);
         return ajax;

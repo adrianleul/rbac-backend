@@ -3,18 +3,26 @@ package com.rbac.system.service.impl;
 import com.rbac.system.domain.SysNotice;
 import com.rbac.system.domain.SysNoticeTarget;
 import com.rbac.system.mapper.SysNoticeMapper;
+import com.rbac.system.mapper.SysDeptMapper;
 import com.rbac.system.service.ISysNoticeService;
+import com.rbac.common.core.domain.entity.SysDept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService
 {
     @Autowired
     private SysNoticeMapper noticeMapper;
+
+    @Autowired
+    private SysDeptMapper deptMapper;
 
     @Override
     public SysNotice selectNoticeById(Long noticeId)
@@ -57,12 +65,48 @@ public class SysNoticeServiceImpl implements ISysNoticeService
         int rows = noticeMapper.insertNotice(notice);
         Long noticeId = notice.getNoticeId(); // should now be set
 
-        // Step 2: Set the noticeId to all targets
+        // Step 2: Expand department targets to include all descendant departments
         if (notice.getTargets() != null) {
+            List<SysNoticeTarget> expandedTargets = new ArrayList<>();
+
+            // Collect selected department IDs and expand with descendants
+            Set<Long> deptIds = new LinkedHashSet<>();
+            List<SysNoticeTarget> nonDeptTargets = new ArrayList<>();
+
             for (SysNoticeTarget target : notice.getTargets()) {
-                target.setNoticeId(noticeId); // this overrides any null value
+                if (target.getTargetDeptId() != null) {
+                    deptIds.add(target.getTargetDeptId());
+                } else {
+                    nonDeptTargets.add(target);
+                }
             }
-            noticeMapper.insertNoticeTargets(notice.getTargets());
+
+            // For each selected department, add all descendants
+            Set<Long> allDeptIds = new LinkedHashSet<>(deptIds);
+            for (Long deptId : deptIds) {
+                List<SysDept> children = deptMapper.selectChildrenDeptById(deptId);
+                for (SysDept child : children) {
+                    allDeptIds.add(child.getDeptId());
+                }
+            }
+
+            // Build targets for all departments (selected + descendants)
+            for (Long id : allDeptIds) {
+                SysNoticeTarget deptTarget = new SysNoticeTarget();
+                deptTarget.setNoticeId(noticeId);
+                deptTarget.setTargetDeptId(id);
+                expandedTargets.add(deptTarget);
+            }
+
+            // Add original non-dept targets (users/roles)
+            for (SysNoticeTarget target : nonDeptTargets) {
+                target.setNoticeId(noticeId);
+                expandedTargets.add(target);
+            }
+
+            if (!expandedTargets.isEmpty()) {
+                noticeMapper.insertNoticeTargets(expandedTargets);
+            }
         }
 
         return rows;
@@ -78,12 +122,42 @@ public class SysNoticeServiceImpl implements ISysNoticeService
         // 2. Delete previous targets
         noticeMapper.deleteNoticeTargetsByNoticeId(notice.getNoticeId());
 
-        // 3. Insert new targets if provided
+        // 3. Insert new targets if provided (expand departments to include descendants)
         if (notice.getTargets() != null && !notice.getTargets().isEmpty()) {
+            List<SysNoticeTarget> expandedTargets = new ArrayList<>();
+
+            Set<Long> deptIds = new LinkedHashSet<>();
+            List<SysNoticeTarget> nonDeptTargets = new ArrayList<>();
+
             for (SysNoticeTarget target : notice.getTargets()) {
-                target.setNoticeId(notice.getNoticeId());
+                if (target.getTargetDeptId() != null) {
+                    deptIds.add(target.getTargetDeptId());
+                } else {
+                    nonDeptTargets.add(target);
+                }
             }
-            noticeMapper.insertNoticeTargets(notice.getTargets());
+
+            Set<Long> allDeptIds = new LinkedHashSet<>(deptIds);
+            for (Long deptId : deptIds) {
+                List<SysDept> children = deptMapper.selectChildrenDeptById(deptId);
+                for (SysDept child : children) {
+                    allDeptIds.add(child.getDeptId());
+                }
+            }
+
+            for (Long id : allDeptIds) {
+                SysNoticeTarget deptTarget = new SysNoticeTarget();
+                deptTarget.setNoticeId(notice.getNoticeId());
+                deptTarget.setTargetDeptId(id);
+                expandedTargets.add(deptTarget);
+            }
+
+            for (SysNoticeTarget target : nonDeptTargets) {
+                target.setNoticeId(notice.getNoticeId());
+                expandedTargets.add(target);
+            }
+
+            noticeMapper.insertNoticeTargets(expandedTargets);
         }
 
         return rows;
