@@ -1,5 +1,10 @@
 # RBAC Role Based Access Controll System
 
+## Repositories
+
+- Frontend repository: [rbac-frontend](https://github.com/adrianleul/rbac-frontend.git)
+- Combined (backend + frontend): [RBAC](https://github.com/adrianleul/RBAC.git)
+
 ## Configure database in Docker
 ### 1. Build PostgreSQL and Redis Docker Image
 Run the following command:
